@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import Head from "next/head";
 import { useStateContext } from "../context";
 import { DisplayCampaigns } from "../components";
-import Head from "next/head";
 
 export default function Profile() {
   const [isLoading, setIsLoading] = useState(false);

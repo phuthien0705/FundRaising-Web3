@@ -11,7 +11,7 @@ const Loader = ({ content = " Transaction is in progress" }) => {
         className="w-[100px] h-[100px] object-contain"
       />
       <p className="mt-[20px] font-epilogue font-bold text-[20px] text-white text-center">
-        {content} <br /> Please wait...
+        {content} {!!content && <br />} Please wait...
       </p>
     </div>
   );

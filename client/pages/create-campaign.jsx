@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
+import Head from "next/head";
 import { useState } from "react";
 import { ethers } from "ethers";
 import { money } from "../assets";
 import { checkIfImage } from "../utils/checkIfImage";
 import { CustomButton, FormField, Loader } from "../components";
 import { useStateContext } from "../context";
-import Head from "next/head";
 export default function CreateCampaign() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
