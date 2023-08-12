@@ -7,33 +7,24 @@ import { calulateBarPercentage } from "../../utils/calulateBarPercentage";
 import { Loader, CountBox, CustomButton } from "../../components";
 import { thirdweb } from "../../assets";
 import useFetchCampaignDetail from "../../hooks/useFetchCampaignDetail";
+import useFetchDonators from "../../hooks/useFetchDonators";
 export default function CampainDetail() {
   const router = useRouter();
   const { pid: pId } = router.query;
   const { campaign, isLoadingCampaignDetail } = useFetchCampaignDetail(pId);
+  const { donators } = useFetchDonators(pId, campaign);
   const { getDonations, contract, address, donate, getCampaignByPid } =
     useStateContext();
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState("");
-  const [donators, setDonators] = useState([]);
   const remainingDays = daysLeft(Number(campaign?.deadline ?? 0));
 
-  const fetchDonators = async () => {
-    const data = await getDonations(pId);
-    setDonators(data);
-  };
   const handleDonate = async () => {
     setIsLoading(true);
     await donate(pId, amount);
     setIsLoading(false);
     router.push("/");
   };
-
-  useEffect(() => {
-    if (contract && campaign) {
-      fetchDonators();
-    }
-  }, [contract, address, campaign]);
 
   if (!campaign) {
     return <Loader content="" />;
